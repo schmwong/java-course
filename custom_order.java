@@ -4,6 +4,25 @@ import java.util.Scanner; // Needed for the Scanner class to read input
 
 public class custom_order {
 
+  // Next Steps
+  static double totalCost;
+  static String addOnList;
+
+  static void addItem(String item, int cost) {
+    totalCost += cost;
+    addOnList += item;
+  }
+
+  static void addThis(String item, int cost) {
+    if (item != "no") {
+      addItem(item, cost);
+      addOnList += ", ";
+    } else {
+      addItem("none", 0);
+      addOnList += ", ";
+    }
+  }
+
   // STEP 1 PRINTING HELLO WORLD TO CONSOLE
   public static void main(String[] args) {
 
@@ -55,24 +74,31 @@ public class custom_order {
       // STEP 5 PROMPT USER TO ORDER
       System.out.println("Do you want CUPCAKES or a CAKE?");
       itemOrder = keyboard.nextLine();
+      addThis(itemOrder, 15);
       // TEST CODE
 
       // STEP 6 PROMPT USER TO CHOOSE FROSTING
       System.out.println("What type of FROSTING do you want? ");
       System.out.println("Vanilla, Chocolate, Strawberry or Coco");
+      System.out.println("Type \"no\" to skip");
       frostingType = keyboard.nextLine();
+      addThis(frostingType, 2);
       // TEST CODE
 
       // STEP 7 PROMPT USER TO CHOOSE FILLING
       System.out.println("What type of FILLING do you want? ");
       System.out.println("Mocha, Mint, Lemon, Caramel or Raspberry");
+      System.out.println("Type \"no\" to skip");
       fillingType = keyboard.nextLine();
+      addThis(fillingType, 3);
       // TEST CODE
 
       // STEP 8 PROMPT USER TO CHOOSE TOPPINGS
       System.out.println("What type of TOPPINGS do you want? ");
       System.out.println("Sprinkles, Cinnamon, Cocoa, Nuts");
+      System.out.println("Type \"no\" to skip");
       toppings = keyboard.nextLine();
+      addThis(toppings, 1);
       // TEST CODE
 
       // STEP 9 DISPLAY ORDER CONFIRMATION
@@ -87,10 +113,12 @@ public class custom_order {
       // TEST CODE
 
       // STEP 10 DISPLAY COST AND SALES TAX
-      System.out.printf("The cost of your order is: $%.2f\n", cost);
-      tax = cost * TAX_RATE;
+      // System.out.printf("Thank you \n\n" + addOnList);
+      System.out.printf("The cost of your order is: $%.2f\n", totalCost);
+      tax = totalCost * TAX_RATE;
       System.out.printf("The tax is: $%.2f\n", tax);
-      System.out.printf("The total due is: $%.2f\n", (tax + cost));
+      System.out.printf("The total due is: $%.2f\n\n", (tax + totalCost));
+
     } finally {
       keyboard.close();
     }
